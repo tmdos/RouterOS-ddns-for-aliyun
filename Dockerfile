@@ -1,11 +1,8 @@
-# 使用官方 Golang 1.18 版本镜像作为基础镜像
-FROM golang:1.19.3 AS build
+# 使用官方 Golang 1.20 版本镜像作为基础镜像
+FROM golang:1.20 AS build
 
-
-# 设置代理
-ENV ALL_PROXY=socks5://192.168.1.33:10803
-ENV HTTP_PROXY=http://192.168.1.33:10804
-ENV HTTPS_PROXY=http://192.168.1.33:10804
+# 设置 Go 代理（使用国内代理 goproxy.cn）
+ENV GOPROXY=https://goproxy.cn,direct
 
 # 设置工作目录
 WORKDIR /app
@@ -25,5 +22,5 @@ RUN go build -o aliyun_ddns
 # 定义启动容器时运行的命令
 CMD ["./aliyun_ddns"]
 
-# 暴露容器的 8800 端口
-EXPOSE 8800
+# 暴露容器的 3000 端口
+EXPOSE 3000

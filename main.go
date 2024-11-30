@@ -22,7 +22,7 @@ func main() {
     r := gin.Default()               // 初始化 Gin 路由
     r.Use(middlewares.Logger())       // 使用自定义的日志中间件
     r.GET("/aliyun_ddns", AddUpdateAliddns)  // 设置路由，调用 AddUpdateAliddns 函数
-    r.Run(":8800")                    // 监听 8800 端口
+    r.Run(":3000")                    // 监听 3000 端口
 }
 
 // AddUpdateAliddns 处理 DDNS 更新请求

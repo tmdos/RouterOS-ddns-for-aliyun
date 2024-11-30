@@ -1,6 +1,6 @@
 module Aliddns-Ros
 
-go 1.19
+go 1.20
 
 require (
 	github.com/denverdino/aliyungo v0.0.0-20220929054937-e3c8bf5ad947
@@ -34,4 +34,3 @@ require (
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
-
