@@ -33,7 +33,7 @@
     :log warning ("使用全局 IPv6 地址: " . $IpAddrGlobal)
 
     # 阿里云DDNS更新请求的URL（修改服务器的ip地址或域名）
-    :local aliddns "http://192.168.x.x：8800/aliyun_ddns?AccessKeyID=$AccessKeyID&AccessKeySecret=$AccessKeySecret&RR=$RR&DomainName=$DomainName&IpAddr=$IpAddrGlobal"
+    :local aliddns "http://192.168.x.x：3000/aliyun_ddns?AccessKeyID=$AccessKeyID&AccessKeySecret=$AccessKeySecret&RR=$RR&DomainName=$DomainName&IpAddr=$IpAddrGlobal"
 
     # 发送HTTP请求，获取响应结果
     :local result [/tool fetch url=($aliddns) mode=http http-method=get as-value output=user]
