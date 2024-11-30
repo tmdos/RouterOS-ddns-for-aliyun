@@ -1,7 +1,7 @@
 # RouterOS 阿里云ddns动态域名解析，支持ipv4t和ipv6 ！
 #### 基于 lsprain 大佬项目的修改版，感谢 lsprain 的分享，原项目可参考 [lsprain 的 GitHub](https://github.com/lsprain)！
 
-### 常见ros阿里ddns都是使用别人的脚本，为是更安全的使用自己的api,所以推荐自己部署！
+### 常见ros阿里云ddns脚本多数使用别人提供的api，推荐自己部署更放心！
 
 ## 一、部署方式
 
