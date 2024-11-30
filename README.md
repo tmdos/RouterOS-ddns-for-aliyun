@@ -33,7 +33,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - [IPV4 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/master/IPv4-Script)
 - [IPV6 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/master/IPv6-Script)
 
-- **注意！！脚本中的阿里云DDNS更新请求的URL(http://192.168.x.x：8800/)),这个要改你成部署API服务器的ip**
+- **注意！！脚本中的阿里云DDNS更新请求的URL(http://192.168.x.x：3000/)),这个要改你成部署API服务器的ip**
 
 ## 三、阿里云API请求方式
 - Method: POST
