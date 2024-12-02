@@ -37,7 +37,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 
 ## 三、阿里云API请求方式
 - Method: POST
-- URL: http://192.168.x.x:3000/aliddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&DomainName=XXX&IpAddr=XXX
+- URL: http://192.168.x.x:3000/aliyun_ddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&DomainName=XXX&IpAddr=XXX
 
 
 
