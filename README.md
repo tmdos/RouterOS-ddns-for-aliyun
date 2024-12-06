@@ -37,4 +37,4 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 
 ## 三、API请求
 - URL:
-- http://:3000/aliyun_ddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&DomainName=XXX&IpAddr=XXX
+- http://ip:3000/aliyun_ddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&DomainName=XXX&IpAddr=XXX
