@@ -1,0 +1,91 @@
+######
+# RouterOS ipv4 ddns for aliyun
+# https://www.putt.us.kg/
+######
+
+# 阿里云AccessKeyID
+:local AccessKeyID "xxxx"
+# 阿里云AccessKeySecret
+:local AccessKeySecret "xxxx"
+# 主域名，例如baidu.com
+:local DomainName "baidu.com"
+# 子域名，例如home.baidu.com，只需要填写home即可
+:local RR "home"
+# 接口名称，例如pppoe-out1
+:local pppoe "pppoe-out1"
+
+# 获取指定接口的公网IP4地址
+:local IpAddr [/ip address get [/ip address find interface=$pppoe] address]
+# 提取IP地址（去除网段）
+:set IpAddr [:pick $IpAddr 0 [:find $IpAddr "/"]]
+:log warning "Global IPv4 地址：$IpAddr"
+
+# 检查是否为私有地址范围
+:local isPrivate false
+
+# 检查192.168.x.x 私有地址范围
+:if ([:find $IpAddr "192.168."] = 0) do={
+    :log warning "找到192.168.私有地址"
+    :set isPrivate true
+}
+
+# 检查10.x.x.x 私有地址范围
+:if ([:find $IpAddr "10."] = 0) do={
+    :log warning "找到10.私有地址"
+    :set isPrivate true
+}
+
+# 检查172.16.x.x - 172.31.x.x 私有地址范围
+:if ([:find $IpAddr "172."] = 0) do={
+    :local secondOctet [:tonum [:pick $IpAddr 4 [:find $IpAddr "." 1]]]
+    :if ($secondOctet >= 16 && $secondOctet <= 31) do={
+        :log warning "找到172.16-172.31私有地址"
+        :set isPrivate true
+    }
+}
+
+# 如果是私有地址，不进行DDNS更新
+:if ($isPrivate) do={
+    :log warning "私有 IP4 地址: $IpAddr，未进行DDNS更新。"
+} else={
+    :log warning "使用全局 IP4 地址: $IpAddr"
+
+    # 阿里云DDNS更新请求的URL（修改服务器的ip地址或域名）
+    :local aliddns "http://192.168.x.x:3000/aliyun_ddns?AccessKeyID=$AccessKeyID&AccessKeySecret=$AccessKeySecret&RR=$RR&DomainName=$DomainName&IpAddr=$IpAddr"
+
+    # 发送HTTP请求，获取响应结果
+    :local result [/tool fetch url=($aliddns) mode=http http-method=get as-value output=user];
+    
+    # 检查返回结果
+    :if ($result->"status" = "finished") do={
+    ## :log warning "HTTP 请求已完成"
+    ## :log warning ("HTTP 请求结果状态: " . $result->"status")
+    ## :log warning ("HTTP 请求结果数据: " . $result->"data")
+
+        :if ($result->"data" = "loginerr") do={
+            :log warning "阿里云登录失败！";
+        }
+        :if ($result->"data" = "iperr") do={
+            :log warning "修改解析地址信息失败！";
+        }
+        :if ($result->"data" = "ip") do={
+            :log warning "修改解析地址信息成功！";
+        }
+        :if ($result->"data" = "domainerr") do={
+            :log warning "添加新域名解析失败！";
+        }
+        :if ($result->"data" = "domain") do={
+            :log warning "添加新域名解析成功！";
+            :log warning "增加域名信息成功！";
+        }
+        :if ($result->"data" = "same") do={
+            :log warning "当前配置解析地址与公网IP4相同，无需修改！";
+        }
+        :if ($result->"data" = "ip") do={
+            :log warning "更新IP4信息成功！";
+            :log warning "$IpAddr";
+        }
+    } else={
+        :log warning "HTTP请求未完成"
+    }
+}
