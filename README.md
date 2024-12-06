@@ -7,11 +7,16 @@
 支持RouterOS Container部署 和 服务器Docker容器部署两种方式。
 
 #### 1. RouterOS Containe 部署
-- 在线拉取或下载镜像上传再部署
+- 在线拉取或下载Releases
 - 参考文档（待更新）
 
 #### 2. 服务器 Docker 容器部署
 - Docker 镜像：[Docker Hub](https://hub.docker.com/r/tmdos/aliyun_ddns)
+- ----------
+- 拉取镜像
+```
+docker pull tmdos/aliyun_ddns
+```
 - 创建Docker容器并运行
 ```
 docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
