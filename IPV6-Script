@@ -1,0 +1,75 @@
+######
+# RouterOS ipv6 ddns for aliyun
+# https://www.putt.us.kg/
+######
+
+# 阿里云AccessKeyID
+:local AccessKeyID "xxxx"
+# 阿里云AccessKeySecret
+:local AccessKeySecret "xxxx"
+# 主域名，例如baidu.com
+:local DomainName "baidu.com"
+# 子域名，例如home.baidu.com，只需要填写home即可
+:local RR "home"
+# 接口名称，例如ether1
+:local wanInterface "bridge1"
+
+# 初始化变量
+:local IpAddrGlobal ""
+
+# 获取指定接口的公网IPv6地址
+:foreach addr in=[/ipv6 address find where interface=$wanInterface] do={
+    :local IpAddr [/ipv6 address get $addr address]
+
+    # 只选择全局 IPv6 地址，排除链路本地地址（fe80::）
+    :if ([:find $IpAddr "fe80::"] != 0) do={
+        :log warning ("Global IPv6 地址: " . [:pick $IpAddr 0 [:find $IpAddr "/"]])
+        :set IpAddrGlobal [:pick $IpAddr 0 [:find $IpAddr "/"]]
+    }
+}
+
+# 如果找到全局 IPv6 地址，记录它
+:if ([:len $IpAddrGlobal] > 0) do={
+    :log warning ("使用全局 IPv6 地址: " . $IpAddrGlobal)
+
+    # 阿里云DDNS更新请求的URL（修改服务器的ip地址或域名）
+    :local aliddns "http://192.168.x.x：3000/aliyun_ddns?AccessKeyID=$AccessKeyID&AccessKeySecret=$AccessKeySecret&RR=$RR&DomainName=$DomainName&IpAddr=$IpAddrGlobal"
+
+    # 发送HTTP请求，获取响应结果
+    :local result [/tool fetch url=($aliddns) mode=http http-method=get as-value output=user]
+
+    # 检查返回结果
+    :if ($result->"status" = "finished") do={
+    ## :log warning "HTTP 请求已完成"
+    ## :log warning ("HTTP 请求结果状态: " . $result->"status")
+    ## :log warning ("HTTP 请求结果数据: " . $result->"data")
+
+        :if ($result->"data" = "loginerr") do={
+            :log warning "阿里云登录失败！"
+        }
+        :if ($result->"data" = "iperr") do={
+            :log warning "修改解析地址信息失败！"
+        }
+        :if ($result->"data" = "ip") do={
+            :log warning "修改解析地址信息成功！"
+        }
+        :if ($result->"data" = "domainerr") do={
+            :log warning "添加新域名解析失败！"
+        }
+        :if ($result->"data" = "domain") do={
+            :log warning "添加新域名解析成功！"
+            :log warning "增加域名信息成功！"
+        }
+        :if ($result->"data" = "same") do={
+            :log warning "当前配置解析地址与公网IPv6相同，无需修改！"
+        }
+        :if ($result->"data" = "ip") do={
+            :log warning "更新IPv6信息成功！"
+            :log warning "$IpAddrGlobal"
+        }
+    } else={
+        :log warning "HTTP请求未完成"
+    }
+} else={
+    :log warning "未找到全局 IPv6 地址"
+}
