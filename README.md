@@ -6,7 +6,7 @@
 
 支持RouterOS Container部署 和 服务器Docker容器部署两种方式。
 
-#### 1. RouterOS Containe 部署
+#### 1. RouterOS Container 部署
 - 在线拉取或下载Releases
 - 参考文档（待更新）
 
@@ -38,3 +38,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 ## 三、API请求
 - URL:
 - http://ip:3000/aliyun_ddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&DomainName=XXX&IpAddr=XXX
+
+## 四、致谢
+- #### 本脚本基于 lsprain 大佬项目的修改版，原项目可参考 lsprain 的[GitHub](https://github.com/lsprain/Aliddns-Ros)！
+- #### 感谢其提供的宝贵分享！
