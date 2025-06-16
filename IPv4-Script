@@ -13,6 +13,8 @@
 :local RR "home"
 # 接口名称，例如pppoe-out1
 :local pppoe "pppoe-out1"
+# TTL, 默认600秒
+:local ttl "600"
 
 # 获取指定接口的公网IP4地址
 :local IpAddr [/ip address get [/ip address find interface=$pppoe] address]
@@ -51,7 +53,7 @@
     :log warning "使用全局 IP4 地址: $IpAddr"
 
     # 阿里云DDNS更新请求的URL（修改服务器的ip地址或域名）
-    :local aliddns "http://192.168.x.x:3000/aliyun_ddns?AccessKeyID=$AccessKeyID&AccessKeySecret=$AccessKeySecret&RR=$RR&DomainName=$DomainName&IpAddr=$IpAddr"
+    :local aliddns "http://192.168.x.x:3000/aliyun_ddns?AccessKeyID=$AccessKeyID&AccessKeySecret=$AccessKeySecret&RR=$RR&DomainName=$DomainName&IpAddr=$IpAddr&TTL=$ttl"
 
     # 发送HTTP请求，获取响应结果
     :local result [/tool fetch url=($aliddns) mode=http http-method=get as-value output=user];
