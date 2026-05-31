@@ -7,7 +7,7 @@
 支持 RouterOS Container 部署 和 服务器 Docker 容器部署两种方式。
 
 #### 1. RouterOS Container 部署 (离线包方式)
-- 下载 Releases 中的 `aliyun_ddns.tar` 并上传到 RouterOS 的 File List。
+- 下载 Releases 中的 `aliyun_ddns.tar` 并上传到 RouterOS 的 File List 根目录。
 - 开启 RouterOS Container 功能，并正常创建网络 (veth、bridge 等，此处略过)。
 - 直接召唤容器（不带任何挂载参数，`root-dir` 记得指向外接盘，如 `disk1`）：
 ```routeros
@@ -25,11 +25,14 @@ docker pull tmdos/aliyun_ddns
 docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 ```
 ## 二outerOS 6-7.x 脚本配置与部署 
-
-请根据自己的实际情况替换 URL 中的参数：
+⚠️极其重要：代码中的 http://192.168.x.x:3000 必须根据你的实际部署情况修改！
+- Linux 服务器 Docker 部署：填写 Linux 服务器的内网 IP。
+- RouterOS Container 部署：填写你为容器（VETH 虚拟网卡）分配的内网 IP（例如 172.17.0.2:3000）
+- 
+# 请根据自己的实际情况替换 URL 中的参数：
 - AccessKeyID：你的阿里云 AccessKey ID。
 - AccessKeySecret：你的阿里云 AccessKey Secret。
-- RR：子域名（如：home）。
+- RR：子域名（如想解析 home.baidu.com，此处填 home）。
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
 ### 1. [IPv4 脚本](./IPv4-Script) 部署方式 (推荐：PPPoE 触发)
@@ -40,14 +43,14 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 /system script run ipv4-ddns-script;
 :log info "PPPoE 拨号成功，已运行 DDNS 更新脚本";
 ```
+- 💡 注：延迟 35 秒是为了防止路由器刚开机时 Docker 容器尚未启动完毕，导致请求发送失败。)
+- 
 ### 2. [IPv6 脚本](./IPv6-Script) 部署方式 (推荐：定时任务触发)
 1. 在 WinBox 进入 `System -> Scripts` 新建脚本，命名为 `ipv6-ddns-script`，贴入修改好参数的完整 IPv6 代码并保存。
 2. 进入 `System -> Scheduler` 新建计划任务。
 3. Name 随意（如 `Aliyun-DDNS-v6`），**Interval 建议设为 `00:01:00`（1分钟执行一次）**。
 4. 在 `On Event` 框中填入以下调用代码并保存：
-
-- **极其重要：！！脚本中的(http://192.168.x.x) 需要根据你部署的ip来填写，linux Docker部署就是linux服务器ip/
-  RouterOS Container部署，这里应填写你为容器分配的 VETH 接口内网 IP..**
+- 💡 注：请放心设置为 1 分钟。当 IP 没变时，脚本仅在本地内存极速比对，会在几毫秒内瞬间退出，不会向外发送网络请求，极度节省路由器性能。当然，你也可以根据喜好改为 3 或 5 分钟
 
 ## 三、API请求
 - URL:
