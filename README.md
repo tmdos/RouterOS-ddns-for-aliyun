@@ -50,7 +50,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 
 ### 1. IPv4 部署方式 (推荐：PPPoE 触发)
 
-> **👉 [点击此处获取完整的 IPv4 脚本代码](./IPv4-Script) 👈**
+> **👉 [IPv4 脚本](./IPv4-Script) 👈**
 1. 在 WinBox 进入 `System -> Scripts` 新建脚本，命名为 `ipv4-ddns-script`，贴入修改好参数的完整 IPv4 代码并保存。
 2. 在你当前拨号的 PPP Profile 的 `Scripts` -> `On Up` 框中填入以下触发代码并保存：
 
@@ -63,7 +63,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 
 ### 1. IPv6 部署方式 (推荐：PPPoE 触发)
 
-> **👉 [点击此处获取完整的 IPv6 脚本代码](./IPv6-Script) 👈**
+> **👉 [IPv6 脚本](./IPv6-Script) 👈**
 1. 在 WinBox 进入 `System -> Scripts` 新建脚本，命名为 `ipv6-ddns-script`，贴入修改好参数的完整 IPv6 代码并保存。
 2. 进入 `System -> Scheduler` 新建计划任务。
 3. Name 随意（如 `Aliyun-DDNS-v6`），**Interval 建议设为 `00:01:00`（1分钟执行一次）**。
