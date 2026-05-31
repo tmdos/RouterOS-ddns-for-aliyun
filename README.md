@@ -10,7 +10,7 @@
 - 下载 Releases 中的 `aliyun_ddns.tar` 并上传到 RouterOS 的 File List 根目录。
 - 开启 RouterOS Container 功能，并正常创建网络 (veth、bridge 等，此处略过)。
 - **请根据你的 RouterOS 系统版本，选择下方对应的部署代码：**
-> **🟢 【如果你是 RouterOS v7.21 及以上版本】（🌟 强烈推荐）**
+> **🟢 【如果你是 RouterOS v7.21 及以上版本】**
 > v7.21 支持直接把缓存写进路由器的运行内存 (tmpfs)，零磁盘读写，极大保护你的 U 盘/硬盘寿命！
 ```routeros
 # 1. 创建内存盘挂载点 (无需指定本地路径)
@@ -20,7 +20,7 @@
 /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns mountlists=ddns_tmp,ddns_run shm-size=128M start-on-boot=yes logging=yes
 ```
 > **🔵 【如果你是 RouterOS v7.20 及以下版本】**
-> 老版本不支持内存盘挂载，为了防止频繁读写损坏硬盘，请直接使用不带挂载的“纯净版”命令：
+> 老版本不支持内存盘挂载，为了防止频繁读写损坏硬盘，请直接使用不带挂载的“纯净版”命令
 > 直接创建容器 (不带挂载参数，root-dir 记得指向你的外接盘，如 disk1)
 ```
 /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns start-on-boot=yes logging=yes
