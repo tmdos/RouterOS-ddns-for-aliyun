@@ -46,8 +46,8 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 3. Name 随意（如 `Aliyun-DDNS-v6`），**Interval 建议设为 `00:01:00`（1分钟执行一次）**。
 4. 在 `On Event` 框中填入以下调用代码并保存：
 
-- **极其重要：！！脚本中的(http://192.168.x.x) 需要根据你部署的ip来填写，Docker部署就是服务器ip
-       RouterOS Container部署，这里应填写你为容器分配的 VETH 接口内网 IP..**
+- **极其重要：！！脚本中的(http://192.168.x.x) 需要根据你部署的ip来填写，linux Docker部署就是linux服务器ip/
+  RouterOS Container部署，这里应填写你为容器分配的 VETH 接口内网 IP..**
 
 ## 三、API请求
 - URL:
