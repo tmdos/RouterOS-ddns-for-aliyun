@@ -19,7 +19,7 @@
 # 2. 创建容器 (root-dir 记得指向你的外接盘，如 disk1)
 /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns mountlists=ddns_tmp,ddns_run shm-size=128M start-on-boot=yes logging=yes
 ```
-🔵 【如果你是 RouterOS v7.20 及以下版本】
+> **🔵 【如果你是 RouterOS v7.20 及以下版本】**
 > 老版本不支持内存盘挂载，为了防止频繁读写损坏硬盘，请直接使用不带挂载的“纯净版”命令：
 > 直接创建容器 (不带挂载参数，root-dir 记得指向你的外接盘，如 disk1)
 ```
@@ -37,7 +37,7 @@ docker pull tmdos/aliyun_ddns
 docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 ```
 ## 二outerOS 6-7.x 脚本配置与部署 
-⚠️极其重要：代码中的 http://192.168.x.x:3000 必须根据你的实际部署情况修改！
+>⚠️极其重要：代码中的 http://192.168.x.x:3000 必须根据你的实际部署情况修改！
 - Linux 服务器 Docker 部署：填写 Linux 服务器的内网 IP。
 - RouterOS Container 部署：填写你为容器（VETH 虚拟网卡）分配的内网 IP（例如 172.17.0.2:3000）
 - 
@@ -56,18 +56,20 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 /system script run ipv4-ddns-script;
 :log info "PPPoE 拨号成功，已运行 DDNS 更新脚本";
 ```
-- 💡 注：延迟 35 秒是为了防止路由器刚开机时 Docker 容器尚未启动完毕，导致请求发送失败。)
+> 💡 注：延迟 35 秒是为了防止路由器刚开机时 Docker 容器尚未启动完毕，导致请求发送失败。)
 - 
 ### 2. [IPv6 脚本](./IPv6-Script) 部署方式 (推荐：定时任务触发)
 1. 在 WinBox 进入 `System -> Scripts` 新建脚本，命名为 `ipv6-ddns-script`，贴入修改好参数的完整 IPv6 代码并保存。
 2. 进入 `System -> Scheduler` 新建计划任务。
 3. Name 随意（如 `Aliyun-DDNS-v6`），**Interval 建议设为 `00:01:00`（1分钟执行一次）**。
 4. 在 `On Event` 框中填入以下调用代码并保存：
-- 💡 注：请放心设置为 1 分钟。当 IP 没变时，脚本仅在本地内存极速比对，会在几毫秒内瞬间退出，不会向外发送网络请求，极度节省路由器性能。当然，你也可以根据喜好改为 3 或 5 分钟
+> 💡 注：请放心设置为 1 分钟。当 IP 没变时，脚本仅在本地内存极速比对，会在几毫秒内瞬间退出，不会向外发送网络请求，极度节省路由器性能。当然，你也可以根据喜好改为 3 或 5 分钟
 
 ## 三、API请求
 - URL:
-- http://ip:3000/aliyun_ddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&DomainName=XXX&IpAddr=XXX
+```
+http://ip:3000/aliyun_ddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&DomainName=XXX&IpAddr=XXX
+```
 
 ## 四、致谢
 - #### 本脚本基于 lsprain 大佬项目的修改版，原项目可参考 lsprain 的[GitHub](https://github.com/lsprain/Aliddns-Ros)！
