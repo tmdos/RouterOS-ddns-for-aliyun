@@ -26,7 +26,7 @@
 /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns start-on-boot=yes logging=yes
 ```
 #### 2. 服务器 Docker 容器部署
-- Docker 镜像：[Docker Hub](https://hub.docker.com/r/tmdos/aliyun_ddns)
+🚀Docker 镜像：[Docker Hub](https://hub.docker.com/r/tmdos/aliyun_ddns)
 - ----------
 >拉取镜像
 ```
