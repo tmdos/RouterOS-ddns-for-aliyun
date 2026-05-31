@@ -8,10 +8,10 @@
 
 #### 1. RouterOS Container 部署
 - 下载Releases(aliyun_ddns.tar)上传到touteros
--  1. 开启RouterOS Containera和正常创建网络 (veth、bridge等，此处略过)
--  2. 直接召唤容器（不带任何挂载参数，root-dir 记得指向外接盘，如 disk1）
+- 1. 开启RouterOS Containera和正常创建网络 (veth、bridge等，此处略过)
+- 2. 直接召唤容器（不带任何挂载参数，root-dir 记得指向外接盘，如 disk1）
    /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns start-on-boot=yes logging=yes
--  3. 启动
+- 3. 启动
 /container/start 0 
 
 #### 2. 服务器 Docker 容器部署
