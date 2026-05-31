@@ -79,5 +79,4 @@ http://ip:3000/aliyun_ddns?AccessKeyID=XXXXXX&AccessKeySecret=XXXXXX&RR=XX&Domai
 ```
 
 ## 四、致谢
-- #### 本脚本基于 lsprain 大佬项目的修改版，原项目可参考 lsprain 的 GitHub！
-- #### 感谢其提供的宝贵分享！
+- #### 本脚本基于 lsprain 大佬项目的修改版，感谢其提供的宝贵分享！
