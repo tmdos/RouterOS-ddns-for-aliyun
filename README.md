@@ -21,8 +21,9 @@
 ```
 > **🔵 【如果你是 RouterOS v7.20 及以下版本】**
 > 老版本不支持内存盘挂载，为了防止频繁读写损坏硬盘，请直接使用不带挂载的“纯净版”命令
-> 直接创建容器 (不带挂载参数，root-dir 记得指向你的外接盘，如 disk1)
+
 ```
+#  创建容器 (root-dir 记得指向你的外接盘，如 disk1)
 /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns start-on-boot=yes logging=yes
 ```
 #### 2. 服务器 Docker 容器部署
