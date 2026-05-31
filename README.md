@@ -47,6 +47,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - RR：子域名（如想解析 home.baidu.com，此处填 home）。
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
+- local apiServer "http://192.168.x.x:3000" 容器API地址与端口
 
 ### 1. IPv4 部署方式 (推荐：PPPoE 触发)
 
