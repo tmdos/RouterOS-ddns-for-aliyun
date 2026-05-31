@@ -61,7 +61,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 ```
 > 💡 注：延迟 35 秒是为了防止路由器刚开机时 Docker 容器尚未启动完毕，导致请求发送失败。)
 
-### 2. IPv6 部署方式 (推荐：PPPoE 触发)
+### 2. IPv6 部署方式 (推荐：定时任务触发)
 
 > **👉 [IPv6 脚本](./IPv6-Script) 👈**
 1. 在 WinBox 进入 `System -> Scripts` 新建脚本，命名为 `ipv6-ddns-script`，贴入修改好参数的完整 IPv6 代码并保存。
