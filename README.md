@@ -48,17 +48,27 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
 - 
-### 1. [IPv4 脚本](./IPv4-Script) 部署方式 (推荐：PPPoE 触发)
-1. 在 WinBox 进入 System -> Scripts 新建脚本，命名为 ipv4-ddns-script，贴入修改好参数的代码并保存。
-2. 在你当前拨号的 PPP Profile 的 Scripts -> On Up 框中填入以下触发代码：
-```
+### 1. IPv4 部署方式 (推荐：PPPoE 触发)
+
+> **👉 [点击此处获取完整的 IPv4 脚本代码](./IPv4-Script) 👈**
+> *(💡 提示：请先点击上方链接打开脚本，修改好参数后，再进行下面的部署)*
+
+IPv4 推荐在 **PPP -> Profiles** 中触发，这样在拨号成功获取 IP 的瞬间就能极速更新。
+
+1. 在 WinBox 进入 `System -> Scripts` 新建脚本，命名为 `ipv4-ddns-script`，贴入修改好参数的完整 IPv4 代码并保存。
+2. 在你当前拨号的 PPP Profile 的 `Scripts` -> `On Up` 框中填入以下触发代码并保存：
+
+```routeros
 :delay 35;
 /system script run ipv4-ddns-script;
 :log info "PPPoE 拨号成功，已运行 DDNS 更新脚本";
 ```
 > 💡 注：延迟 35 秒是为了防止路由器刚开机时 Docker 容器尚未启动完毕，导致请求发送失败。)
 - 
-### 2. [IPv6 脚本](./IPv6-Script) 部署方式 (推荐：定时任务触发)
+### 1. IPv6 部署方式 (推荐：PPPoE 触发)
+
+> **👉 [点击此处获取完整的 IPv6 脚本代码](./IPv6-Script) 👈**
+> *(💡 提示：请先点击上方链接打开脚本，修改好参数后，再进行下面的部署)*
 1. 在 WinBox 进入 `System -> Scripts` 新建脚本，命名为 `ipv6-ddns-script`，贴入修改好参数的完整 IPv6 代码并保存。
 2. 进入 `System -> Scheduler` 新建计划任务。
 3. Name 随意（如 `Aliyun-DDNS-v6`），**Interval 建议设为 `00:01:00`（1分钟执行一次）**。
