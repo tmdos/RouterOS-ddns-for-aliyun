@@ -40,14 +40,14 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 >⚠️极其重要：代码中的 http://192.168.x.x:3000 必须根据你的实际部署情况修改！
 > Linux 服务器 Docker 部署：填写 Linux 服务器的内网 IP。
 > RouterOS Container 部署：填写你为容器（VETH 虚拟网卡）分配的内网 IP（例如 172.17.0.2:3000）
-- 
+
 ### 请根据自己的实际情况替换 URL 中的参数：
 - AccessKeyID：你的阿里云 AccessKey ID。
 - AccessKeySecret：你的阿里云 AccessKey Secret。
 - RR：子域名（如想解析 home.baidu.com，此处填 home）。
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
-- 
+
 ### 1. IPv4 部署方式 (推荐：PPPoE 触发)
 
 > **👉 [点击此处获取完整的 IPv4 脚本代码](./IPv4-Script) 👈**
@@ -60,7 +60,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 :log info "PPPoE 拨号成功，已运行 DDNS 更新脚本";
 ```
 > 💡 注：延迟 35 秒是为了防止路由器刚开机时 Docker 容器尚未启动完毕，导致请求发送失败。)
-- 
+
 ### 1. IPv6 部署方式 (推荐：PPPoE 触发)
 
 > **👉 [点击此处获取完整的 IPv6 脚本代码](./IPv6-Script) 👈**
