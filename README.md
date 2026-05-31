@@ -32,7 +32,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - RR：子域名（如：home）。
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
-- [IPV4 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/main/IPv4-Script) ipv4部署方式 (推荐：PPPoE 触发)
+### 1. [IPv4 脚本](./IPv4-Script) 部署方式 (推荐：PPPoE 触发)
 1. 在 WinBox 进入 System -> Scripts 新建脚本，命名为 ipv4-ddns-script，贴入修改好参数的代码并保存。
 2. 在你当前拨号的 PPP Profile 的 Scripts -> On Up 框中填入以下触发代码：
 ```
