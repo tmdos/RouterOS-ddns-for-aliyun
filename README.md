@@ -29,12 +29,13 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - Linux 服务器 Docker 部署：填写 Linux 服务器的内网 IP。
 - RouterOS Container 部署：填写你为容器（VETH 虚拟网卡）分配的内网 IP（例如 172.17.0.2:3000）
 - 
-# 请根据自己的实际情况替换 URL 中的参数：
+### 请根据自己的实际情况替换 URL 中的参数：
 - AccessKeyID：你的阿里云 AccessKey ID。
 - AccessKeySecret：你的阿里云 AccessKey Secret。
 - RR：子域名（如想解析 home.baidu.com，此处填 home）。
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
+- 
 ### 1. [IPv4 脚本](./IPv4-Script) 部署方式 (推荐：PPPoE 触发)
 1. 在 WinBox 进入 System -> Scripts 新建脚本，命名为 ipv4-ddns-script，贴入修改好参数的代码并保存。
 2. 在你当前拨号的 PPP Profile 的 Scripts -> On Up 框中填入以下触发代码：
