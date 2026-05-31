@@ -33,8 +33,8 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - RR：子域名（如：home）。
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(如pppoe-out1/ether1)。
-- [IPV4 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/master/IPv4-Script)
-- [IPV6 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/master/IPv6-Script)
+- [IPV4 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/main/IPv4-Script)
+- [IPV6 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/main/IPv6-Script)
 
 - **注意！！脚本中的(http://192.168.x.x) 需要根据你部署的ip来填写，
           例如RouterOS Container部署，那么EVTH的ip就是需要填写ip..**
