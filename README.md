@@ -16,9 +16,7 @@
 # 1. 创建内存盘挂载点 (无需指定本地路径)
 /container/mounts/add list=ddns_tmp dst="/tmp"
 /container/mounts/add list=ddns_run dst="/run"
-
 # 2. 创建容器 (root-dir 记得指向你的外接盘，如 disk1)
-```
 /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns mountlists=ddns_tmp,ddns_run shm-size=128M start-on-boot=yes logging=yes
 ```
 🔵 【如果你是 RouterOS v7.20 及以下版本】
