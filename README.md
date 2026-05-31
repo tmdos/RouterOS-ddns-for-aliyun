@@ -4,7 +4,7 @@
 
 ## 一、部署方式
 
-支持 RouterOS Container 部署 和 服务器 Docker 容器部署两种方式。
+🚀 支持 RouterOS Container 部署 和 服务器 Docker 容器部署两种方式。
 
 #### 1. RouterOS Container 部署 (离线包方式)
 - 下载 Releases 中的 `aliyun_ddns.tar` 并上传到 RouterOS 的 File List 根目录。
@@ -28,25 +28,25 @@
 #### 2. 服务器 Docker 容器部署
 - Docker 镜像：[Docker Hub](https://hub.docker.com/r/tmdos/aliyun_ddns)
 - ----------
-- 拉取镜像
+>拉取镜像
 ```
 docker pull tmdos/aliyun_ddns
 ```
-- 创建Docker容器并运行
+>创建Docker容器并运行
 ```
 docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 ```
 ## 二outerOS 6-7.x 脚本配置与部署 
 >⚠️极其重要：代码中的 http://192.168.x.x:3000 必须根据你的实际部署情况修改！
-- Linux 服务器 Docker 部署：填写 Linux 服务器的内网 IP。
-- RouterOS Container 部署：填写你为容器（VETH 虚拟网卡）分配的内网 IP（例如 172.17.0.2:3000）
+> Linux 服务器 Docker 部署：填写 Linux 服务器的内网 IP。
+> RouterOS Container 部署：填写你为容器（VETH 虚拟网卡）分配的内网 IP（例如 172.17.0.2:3000）
 - 
 ### 请根据自己的实际情况替换 URL 中的参数：
-- AccessKeyID：你的阿里云 AccessKey ID。
-- AccessKeySecret：你的阿里云 AccessKey Secret。
-- RR：子域名（如想解析 home.baidu.com，此处填 home）。
-- DomainName：你的主域名（如：baidu.com）。
-- local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
+> AccessKeyID：你的阿里云 AccessKey ID。
+> AccessKeySecret：你的阿里云 AccessKey Secret。
+> RR：子域名（如想解析 home.baidu.com，此处填 home）。
+> DomainName：你的主域名（如：baidu.com）。
+> local pppoe "pppoe-out1" 接口名称，(IPv4 一般为 pppoe-out1，IPv6 一般为 bridge1 或 ether1)。
 - 
 ### 1. IPv4 部署方式 (推荐：PPPoE 触发)
 
