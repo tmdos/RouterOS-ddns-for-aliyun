@@ -1,18 +1,17 @@
-# RouterOS 阿里云ddns动态域名解析，支持ipv4和ipv6 ！
+# RouterOS 阿里云 DDNS 动态域名解析 (支持 IPv4 / IPv6)
 
-### 常见RouterOS阿里云ddns脚本多数使用别人提供的api，自己部署更放心！
+### 常见 RouterOS 阿里云 DDNS 脚本多数使用别人提供的 API，自己部署更放心！
 
 ## 一、部署方式
 
-支持RouterOS Container部署 和 服务器Docker容器部署两种方式。
+支持 RouterOS Container 部署 和 服务器 Docker 容器部署两种方式。
 
-#### 1. RouterOS Container 部署
-- 下载Releases(aliyun_ddns.tar)上传到touteros
--  开启RouterOS Containera和正常创建网络 (veth、bridge等，此处略过)
--  直接召唤容器（不带任何挂载参数，root-dir 记得指向外接盘，如 disk1）
-  ```
+#### 1. RouterOS Container 部署 (离线包方式)
+- 下载 Releases 中的 `aliyun_ddns.tar` 并上传到 RouterOS 的 File List。
+- 开启 RouterOS Container 功能，并正常创建网络 (veth、bridge 等，此处略过)。
+- 直接召唤容器（不带任何挂载参数，`root-dir` 记得指向外接盘，如 `disk1`）：
+```routeros
 /container/add file=aliyun_ddns.tar interface=veth1 root-dir=disk1/ddns start-on-boot=yes logging=yes
-  ```
 
 #### 2. 服务器 Docker 容器部署
 - Docker 镜像：[Docker Hub](https://hub.docker.com/r/tmdos/aliyun_ddns)
@@ -33,7 +32,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - RR：子域名（如：home）。
 - DomainName：你的主域名（如：baidu.com）。
 - local pppoe "pppoe-out1" 接口名称，(如pppoe-out1/ether1)。
-- [IPV4 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/main/IPv4-Script)
+- [IPV4 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/main/IPv4-Script) ipv4脚本可以在
 - [IPV6 脚本](https://github.com/tmdos/RouterOS-ddns-for-aliyun/blob/main/IPv6-Script)
 
 - **注意！！脚本中的(http://192.168.x.x) 需要根据你部署的ip来填写，
