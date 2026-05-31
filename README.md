@@ -41,7 +41,7 @@ docker run -d --name aliyun_ddns -p 3000:3000 tmdos/aliyun_ddns
 - Linux 服务器 Docker 部署：填写 Linux 服务器的内网 IP。
 - RouterOS Container 部署：填写你为容器（VETH 虚拟网卡）分配的内网 IP（例如 172.17.0.2:3000）
 
-### 请根据自己的实际情况替换 URL 中的参数：
+#### 请根据自己的实际情况替换 URL 中的参数：
 - AccessKeyID：你的阿里云 AccessKey ID。
 - AccessKeySecret：你的阿里云 AccessKey Secret。
 - RR：子域名（如想解析 home.baidu.com，此处填 home）。
